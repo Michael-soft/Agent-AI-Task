@@ -131,3 +131,18 @@ T
 
 The knowledge graph has been synced to Neo4j, with 1 Session node, 21 AgentAction nodes, and 6 MCPSer
 [2026-06-13 01:21:09] [ANALYSIS] [INFO] Analysis session complete — logs → analysis_agent.log
+[2026-06-13 02:25:55] [ANALYSIS] [INFO] Building Log Analysis Agent | tools=['semantic_log_search', 'sync_knowledge_graph', 'analyze_tool_latency', 'analyze_token_consumption', 'analyze_error_frequency']
+[2026-06-13 02:27:45] [ANALYSIS] [INFO] analyze_error_frequency
+[2026-06-13 02:27:45] [ANALYSIS] [INFO] Log store opened (read) → mcp_agent_log.db
+[2026-06-13 02:27:45] [ANALYSIS] [INFO] Log store opened (read) → mcp_agent_log.db
+[2026-06-13 02:27:45] [ANALYSIS] [INFO] sync_knowledge_graph | 82 log entries read
+[2026-06-13 02:27:45] [ANALYSIS] [INFO] Connecting to Neo4j Aura → neo4j+s://e254bce7.databases.neo4j.io
+[2026-06-13 02:27:45] [ANALYSIS] [INFO] analyze_error_frequency | chart saved → charts/error_frequency.png
+[2026-06-13 02:27:48] [ANALYSIS] [INFO] Neo4j projection committed | nodes=85 edges=107
+[2026-06-13 02:27:49] [ANALYSIS] [INFO] analyze_error_frequency
+[2026-06-13 02:27:49] [ANALYSIS] [INFO] sync_knowledge_graph | 82 log entries read
+[2026-06-13 02:27:49] [ANALYSIS] [INFO] Connecting to Neo4j Aura → neo4j+s://e254bce7.databases.neo4j.io
+[2026-06-13 02:27:49] [ANALYSIS] [INFO] analyze_error_frequency | chart saved → charts/error_frequency.png
+[2026-06-13 02:27:51] [ANALYSIS] [INFO] Neo4j projection committed | nodes=85 edges=107
+[2026-06-13 02:31:44] [ANALYSIS] [INFO] analyze_tool_latency | window=10
+[2026-06-13 02:31:45] [ANALYSIS] [INFO] analyze_tool_latency | chart saved → charts/tool_latency.png

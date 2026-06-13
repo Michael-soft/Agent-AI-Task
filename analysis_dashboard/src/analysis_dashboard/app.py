@@ -73,7 +73,7 @@ def _render_tool_result(name: str, content: str) -> None:
     chart_path = data.get("chart_path")
     st.json({k: v for k, v in data.items() if k != "by_component"})
     if chart_path and Path(chart_path).exists():
-        st.image(chart_path, caption=chart_path, use_container_width=True)
+        st.image(chart_path, caption=chart_path, width="stretch")
 
 
 def _run_and_render(agent, query: str) -> None:
@@ -133,7 +133,7 @@ with st.sidebar:
         "Check error frequency, then sync the knowledge graph to Neo4j and report committed nodes/edges.",
     ]
     for ex in examples:
-        if st.button(ex, use_container_width=True):
+        if st.button(ex, width="stretch"):
             st.session_state.pending = ex
 
 if "history" not in st.session_state:

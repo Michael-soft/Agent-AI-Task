@@ -254,6 +254,18 @@ RETURN s, a, c LIMIT 50;
 
 ---
 
+## Screenshots
+
+A successful end-to-end run (operational plane + analysis plane + Neo4j Aura),
+captured **Sat 13 Jun 2026, 02:52–02:54** with the machine clock visible. See
+[`screenshots/`](screenshots/) for the full index.
+
+| Agent client trace | Analysis agent → Neo4j commit | Dashboard latency chart | Neo4j Aura graph |
+|---|---|---|---|
+| ![client](screenshots/01-agent-client-trace.png) | ![analysis](screenshots/03-analysis-agent-neo4j-commit.png) | ![dashboard](screenshots/04-dashboard-latency-chart.png) | ![graph](screenshots/05-neo4j-aura-graph.png) |
+
+---
+
 ## Troubleshooting
 
 | Error | Fix |
