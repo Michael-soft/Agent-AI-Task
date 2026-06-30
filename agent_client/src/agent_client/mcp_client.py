@@ -1,23 +1,28 @@
 """
 mcp_client.py
 ─────────────
-FastMCP client layer for the Stage 2 agent.
+FastMCP client layer for the Stage 4 resilient MCP client.
 
 Responsibilities
-  1. Connect to the FastMCP server via streamable-http.
-  2. Handle MCP Sampling requests from the server — execute them using
-     the local Groq LLM and return generated text back over the transport.
+  1. Connect to the FastMCP server via streamable-http (singleton client; the
+     MCP initialize handshake is performed once-per-connection, guarded by
+     ``initialize_result is None`` so an already-initialized client is never
+     asked to re-handshake).
+  2. Handle MCP Sampling requests from the server — execute them with the
+     client's resilient Groq LLM (RunnableWithRetry) and return text back.
   3. Forward server log notifications to the dual-stream logger (server_log).
-  4. Expose two LangChain @tool-decorated wrappers the ReAct agent calls:
+  4. Expose two server-backed LangChain @tool wrappers (no direct web access —
+     the client relies on the server for all retrieval/grounding):
        • remote_reflection_tool — calls server reflection_tool over MCP/HTTP.
        • remote_crag_tool       — reads server CRAG resource over MCP/HTTP.
+     Each runs through the Stage 4 resilient chain (RunnableWithRetry →
+     self-healing RunnableWithFallbacks → hardcoded absolute fallback).
 
 Design notes
   • Pydantic models (ReflectionRequest, ReflectionResponse, CRAGResponse) are
-    defined at the top and ACTIVELY USED inside each @tool for input validation
+    defined at the top and ACTIVELY USED inside each tool for input validation
     and output parsing — not just as documentation stubs.
-  • _sampling_llm is lazy-initialised so GROQ_API_KEY is read at call-time.
-  • FastMCP Client context manager returns the same client; use directly.
+  • The sampling LLM is lazy-initialised so GROQ_API_KEY is read at call-time.
   • LangChain @tool functions are synchronous; _run_async() bridges asyncio.
 """
 
@@ -320,7 +325,11 @@ async def _call_server_tool(tool_name: str, args: dict[str, Any]) -> str:
     text = ""
     try:
         async with mcp_client:
-            await mcp_client.initialize()
+            # Only perform the MCP initialize handshake once per connection — a
+            # singleton client that is already initialized must not re-handshake
+            # (some servers reject re-initialization of an active session).
+            if mcp_client.initialize_result is None:
+                await mcp_client.initialize()
             result = await mcp_client.call_tool(tool_name, args)
         if isinstance(result, list) and result:
             block = result[0]
@@ -354,7 +363,8 @@ async def _read_server_resource(uri: str) -> str:
     text = ""
     try:
         async with mcp_client:
-            await mcp_client.initialize()
+            if mcp_client.initialize_result is None:
+                await mcp_client.initialize()
             result = await mcp_client.read_resource(uri)
         if isinstance(result, list) and result:
             block = result[0]

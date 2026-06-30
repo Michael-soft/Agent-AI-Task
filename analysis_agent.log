@@ -689,3 +689,85 @@ The most recent failure mode, "resilience.remote_crag_tool / retry_attempt [erro
 [2026-06-29 05:19:09] [ANALYSIS] [INFO] analyze_error_frequency | chart saved → charts/chart_20260629_051909.png
 [2026-06-29 05:19:09] [ANALYSIS] [INFO] [edgeless] trend_analysis_node → goto=synthesis_node | plan_remaining=[]
 [2026-06-29 05:19:11] [ANALYSIS] [INFO] SHAP chart saved → charts/shap_feature_weights.png
+[2026-06-30 20:17:24] [ANALYSIS] [INFO] Log Analysis Agent starting up (edgeless StateGraph, decoupled process)
+[2026-06-30 20:17:24] [ANALYSIS] [INFO] Reading log store: mcp_agent_log.db
+[2026-06-30 20:17:24] [ANALYSIS] [INFO] Building edgeless Log Analysis Agent (StateGraph + Command routing)
+[2026-06-30 20:17:24] [ANALYSIS] [INFO] Edgeless StateGraph compiled | 1 static edge (START→initial_ingest_node); all other hops via Command(goto)
+[2026-06-30 20:17:24] [ANALYSIS] [INFO] ======================================================================
+[2026-06-30 20:17:24] [ANALYSIS] [INFO] Analysis request: 'Search the logs for any slow or anomalous MCP sampling interactions and summarise what you find.'
+[2026-06-30 20:17:24] [ANALYSIS] [INFO] [edgeless] ingest | intent={'search': True, 'trend': False, 'graph': False, 'audit': False} | plan=['semantic_search_node'] | session=None
+[2026-06-30 20:17:24] [ANALYSIS] [INFO] semantic_log_search | query='Search the logs for any slow or anomalous MCP sampling interactions and summarise what you find.' | limit=6
+[2026-06-30 20:17:25] [ANALYSIS] [INFO] Log store opened (read) → mcp_agent_log.db
+[2026-06-30 20:17:25] [ANALYSIS] [INFO] semantic_log_search | 6 hits returned
+[2026-06-30 20:17:25] [ANALYSIS] [INFO] [edgeless] semantic_search_node → goto=synthesis_node | plan_remaining=[]
+[2026-06-30 20:17:28] [ANALYSIS] [INFO] Edgeless route: initial_ingest_node → semantic_search_node → synthesis_node
+[2026-06-30 20:17:28] [ANALYSIS] [DEBUG]   [initial_ingest_node] intent={'search': True, 'trend': False, 'graph': False, 'audit': False}; plan=['semantic_search_node']
+[2026-06-30 20:17:28] [ANALYSIS] [DEBUG]   [semantic_search_node] semantic_log_search → 6 matches
+[2026-06-30 20:17:28] [ANALYSIS] [DEBUG]   [synthesis_node] final diagnosis composed
+[2026-06-30 20:17:28] [ANALYSIS] [INFO] Final analysis answer: **Diagnostic Analysis**
+
+Based on the semantic search results, two interactions with the MCP sampling component have been identified as potentially slow or anomalous. 
+
+1. **Interaction 1**: 
+   - Session ID: `7b9e9ef5-23ea-4d52-a87c-508da5fec3e3`
+   - Latency: `1319.58` ms
+   - Status: `success`
+  
+[2026-06-30 20:17:28] [ANALYSIS] [INFO] ======================================================================
+[2026-06-30 20:17:28] [ANALYSIS] [INFO] Analysis request: 'Analyze tool latency trends and token consumption, and tell me which component is the heaviest.'
+[2026-06-30 20:17:28] [ANALYSIS] [INFO] [edgeless] ingest | intent={'search': False, 'trend': True, 'graph': False, 'audit': False} | plan=['trend_analysis_node'] | session=None
+[2026-06-30 20:17:28] [ANALYSIS] [INFO] analyze_tool_latency | window=3
+[2026-06-30 20:17:28] [ANALYSIS] [INFO] analyze_tool_latency | chart saved → charts/chart_20260630_201728.png
+[2026-06-30 20:17:28] [ANALYSIS] [INFO] analyze_error_frequency
+[2026-06-30 20:17:28] [ANALYSIS] [INFO] analyze_error_frequency | chart saved → charts/chart_20260630_201728.png
+[2026-06-30 20:17:28] [ANALYSIS] [INFO] analyze_token_consumption
+[2026-06-30 20:17:28] [ANALYSIS] [INFO] analyze_token_consumption | chart saved → charts/chart_20260630_201728.png
+[2026-06-30 20:17:28] [ANALYSIS] [INFO] [edgeless] trend_analysis_node → goto=synthesis_node | plan_remaining=[]
+[2026-06-30 20:17:30] [ANALYSIS] [INFO] Edgeless route: initial_ingest_node → trend_analysis_node → synthesis_node
+[2026-06-30 20:17:30] [ANALYSIS] [DEBUG]   [initial_ingest_node] intent={'search': False, 'trend': True, 'graph': False, 'audit': False}; plan=['trend_analysis_node']
+[2026-06-30 20:17:30] [ANALYSIS] [DEBUG]   [trend_analysis_node] trend tools run: ['latency', 'errors', 'tokens']
+[2026-06-30 20:17:30] [ANALYSIS] [DEBUG]   [synthesis_node] final diagnosis composed
+[2026-06-30 20:17:30] [ANALYSIS] [INFO] Final analysis answer: Based on the provided findings, the analysis of tool latency trends and token consumption reveals the following insights:
+
+1. **Latency Trends**: The overall average latency is 8035.2 ms, with significant variations across different tools. The "None" tool has the highest mean latency (35776.14 ms), 
+[2026-06-30 20:17:30] [ANALYSIS] [INFO] ======================================================================
+[2026-06-30 20:17:30] [ANALYSIS] [INFO] Analysis request: 'Check the error frequency across components, then sync the knowledge graph to Neo4j and report exactly which nodes and edges were committed.'
+[2026-06-30 20:17:30] [ANALYSIS] [INFO] [edgeless] ingest | intent={'search': False, 'trend': True, 'graph': True, 'audit': False} | plan=['trend_analysis_node', 'graph_sync_node'] | session=None
+[2026-06-30 20:17:30] [ANALYSIS] [INFO] analyze_tool_latency | window=3
+[2026-06-30 20:17:30] [ANALYSIS] [INFO] analyze_tool_latency | chart saved → charts/chart_20260630_201730.png
+[2026-06-30 20:17:30] [ANALYSIS] [INFO] analyze_error_frequency
+[2026-06-30 20:17:30] [ANALYSIS] [INFO] analyze_error_frequency | chart saved → charts/chart_20260630_201730.png
+[2026-06-30 20:17:30] [ANALYSIS] [INFO] [edgeless] trend_analysis_node → goto=graph_sync_node | plan_remaining=[]
+[2026-06-30 20:17:30] [ANALYSIS] [INFO] sync_knowledge_graph | 231 log entries read
+[2026-06-30 20:17:31] [ANALYSIS] [INFO] Connecting to Neo4j Aura → neo4j+s://0c223932.databases.neo4j.io
+[2026-06-30 20:17:36] [ANALYSIS] [INFO] Neo4j projection committed | nodes=240 edges=307
+[2026-06-30 20:17:36] [ANALYSIS] [INFO] [edgeless] graph_sync_node → goto=synthesis_node | plan_remaining=[]
+[2026-06-30 20:17:38] [ANALYSIS] [INFO] Edgeless route: initial_ingest_node → trend_analysis_node → graph_sync_node → synthesis_node
+[2026-06-30 20:17:38] [ANALYSIS] [DEBUG]   [initial_ingest_node] intent={'search': False, 'trend': True, 'graph': True, 'audit': False}; plan=['trend_analysis_node', 'graph_sync_node']
+[2026-06-30 20:17:38] [ANALYSIS] [DEBUG]   [trend_analysis_node] trend tools run: ['latency', 'errors']
+[2026-06-30 20:17:38] [ANALYSIS] [DEBUG]   [graph_sync_node] graph sync → committed
+[2026-06-30 20:17:38] [ANALYSIS] [DEBUG]   [synthesis_node] final diagnosis composed
+[2026-06-30 20:17:38] [ANALYSIS] [INFO] Final analysis answer: **Diagnostic Analysis**
+
+The error frequency across components is reported as part of the TREND[errors] metric, which indicates a total of 21 errors out of 231 interactions, resulting in an error rate of 0.0909. The breakdown by component shows that none of the components reported in the "by_compone
+[2026-06-30 20:17:38] [ANALYSIS] [INFO] ======================================================================
+[2026-06-30 20:17:38] [ANALYSIS] [INFO] Analysis request: 'Run an explainability audit on the most recent failure mode and explain which feature and token most influenced it.'
+[2026-06-30 20:17:38] [ANALYSIS] [INFO] [edgeless] ingest | intent={'search': False, 'trend': True, 'graph': False, 'audit': True} | plan=['semantic_search_node', 'explainability_node'] | session=None
+[2026-06-30 20:17:38] [ANALYSIS] [INFO] semantic_log_search | query='Run an explainability audit on the most recent failure mode and explain which feature and token most influenced it.' | limit=6
+[2026-06-30 20:17:38] [ANALYSIS] [INFO] semantic_log_search | 6 hits returned
+[2026-06-30 20:17:38] [ANALYSIS] [INFO] [edgeless] semantic_search_node → goto=explainability_node | plan_remaining=[]
+[2026-06-30 20:17:38] [ANALYSIS] [INFO] Explainability audit | session=None target=None
+[2026-06-30 20:17:41] [ANALYSIS] [INFO] Graph hydration → Neo4j Aura | session=bf42d439-8f73-45fd-82b6-60057f7f44de
+[2026-06-30 20:17:42] [ANALYSIS] [INFO] Audit complete | Targeted failure mode → resilience.remote_crag_tool / retry_attempt [error]: anomalous trace. Proxy SHAP attributes the structured skew primarily to 'payload_length' (predicted error confidence 0.44004). Proxy LIME flags the token 'injected' as the strongest local text driver. Graph context: 12 adjacent AgentAction(s) and 0 MCPServerCall(s) hydrated via neo4j_aura.
+[2026-06-30 20:17:42] [ANALYSIS] [INFO] SHAP chart saved → charts/shap_feature_weights.png
+[2026-06-30 20:17:42] [ANALYSIS] [INFO] Explainability audit report written → explainability_audit_report.json
+[2026-06-30 20:17:42] [ANALYSIS] [INFO] [edgeless] explainability_node → goto=synthesis_node | plan_remaining=[]
+[2026-06-30 20:17:44] [ANALYSIS] [INFO] Edgeless route: initial_ingest_node → semantic_search_node → explainability_node → synthesis_node
+[2026-06-30 20:17:44] [ANALYSIS] [DEBUG]   [initial_ingest_node] intent={'search': False, 'trend': True, 'graph': False, 'audit': True}; plan=['semantic_search_node', 'explainability_node']
+[2026-06-30 20:17:44] [ANALYSIS] [DEBUG]   [semantic_search_node] semantic_log_search → 6 matches
+[2026-06-30 20:17:44] [ANALYSIS] [DEBUG]   [explainability_node] explainability audit → Targeted failure mode → resilience.remote_crag_tool / retry_attempt [error]: anomalous tra
+[2026-06-30 20:17:44] [ANALYSIS] [DEBUG]   [synthesis_node] final diagnosis composed
+[2026-06-30 20:17:44] [ANALYSIS] [INFO] Final analysis answer: Based on the explainability audit, the most recent failure mode is "resilience.remote_crag_tool / retry_attempt [error]: anomalous trace". 
+
+The SHAP analysis reveals that the most influential feature contributing to this failure is "payload_length" with a value of 0.17152. This suggests that the si
+[2026-06-30 20:17:44] [ANALYSIS] [INFO] Analysis session complete — logs → analysis_agent.log

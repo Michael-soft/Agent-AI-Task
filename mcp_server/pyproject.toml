@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name            = "mcp-server"
 version         = "0.1.0"
-description     = "Stage 2 FastMCP server — Reflection Tool + Hierarchical CRAG Resource"
+description     = "FastMCP server (core service, Stages 2–4) — Reflection Tool + Hierarchical CRAG Resource with LLM ToT grading"
 requires-python = ">=3.11"
 dependencies    = [
     "fastmcp>=2.3.4",

@@ -1,21 +1,24 @@
 """
 main.py
 ───────
-Stage 2 — AI Agent (MCP Client) entrypoint.
+Stage 4 — Resilient AI Agent (MCP Client) entrypoint.
 
 Initialises a LangChain agent via the modern ``create_agent`` factory
-(LangChain 1.x / LangGraph) equipped with three tools:
-  1. tavily_search               — real-world web grounding (local Tavily).
-  2. remote_crag_tool            — hierarchical CRAG resource over MCP HTTP.
-  3. remote_reflection_tool      — 2-stage critique + correction over MCP HTTP.
+(LangChain 1.x / LangGraph). The agent owns NO direct web-search tool: all
+real-world grounding is delegated to the MCP server, so the client relies on
+the server for information retrieval. It is equipped with exactly two
+server-backed tools:
+  1. remote_crag_tool            — hierarchical CRAG resource over MCP HTTP.
+                                   The server performs the Tavily web fallback
+                                   internally when its graded internal knowledge
+                                   scores below threshold — the client never
+                                   calls Tavily directly.
+  2. remote_reflection_tool      — 2-stage critique + correction over MCP HTTP.
 
-The agent uses native tool-calling (not text-format ReAct) — the same
-``create_agent`` factory used by the decoupled analysis dashboard, so both
-processes share one agent-construction idiom.
-
-All MCP communication uses streamable-http transport. The sampling handler
-in mcp_client.py ensures the server's Reflection tool delegates LLM calls
-back to this client's Groq model — the server itself holds no API keys.
+Each tool runs through the Stage 4 resilient chain (RunnableWithRetry →
+self-healing RunnableWithFallbacks → hardcoded absolute fallback) in
+resilience.py / mcp_client.py. All MCP communication uses streamable-http; the
+server holds no API keys (every LLM call is delegated back via MCP Sampling).
 
 Run
   uv run --package agent-client agent-client
@@ -32,7 +35,6 @@ import uuid
 
 from langchain.agents import create_agent
 from langchain_groq import ChatGroq
-from langchain_tavily import TavilySearch
 
 from .log_store import LogEntry, estimate_tokens, get_log_store
 from .logger import client_log
@@ -76,24 +78,18 @@ def _build_llm() -> ChatGroq:
 
 def _build_tools() -> list:
     """
-    Assemble the agent's tool registry.
+    Assemble the agent's tool registry — server-backed only.
+
+    The client deliberately exposes NO direct web-search tool: routing all
+    grounding through the server preserves the MCP boundary (and the server's
+    CRAG resource already performs a Tavily web fallback internally).
 
     Tool order signals priority to the agent:
-      1. tavily_search          — gather real-world facts first.
-      2. remote_crag_tool       — domain knowledge with ToT grading.
-      3. remote_reflection_tool — verify draft before the final answer.
+      1. remote_crag_tool       — retrieve graded domain knowledge (web fallback
+                                  handled server-side).
+      2. remote_reflection_tool — verify + correct the draft before answering.
     """
-    tavily = TavilySearch(
-        max_results=2,
-        search_depth="advanced",
-        include_answer=True,
-        include_raw_content=False,
-        description=(
-            "Search the web for current, factual information. Use for recent events, "
-            "statistics, or anything requiring up-to-date real-world data."
-        ),
-    )
-    return [tavily, remote_crag_tool, remote_reflection_tool]
+    return [remote_crag_tool, remote_reflection_tool]
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -101,12 +97,12 @@ def _build_tools() -> list:
 # ─────────────────────────────────────────────────────────────────────────────
 
 _SYSTEM_PROMPT = (
-    "You are a Thinking Agent connected to a remote MCP server, equipped with "
-    "three tools. Reason step by step and call tools to ground every answer.\n\n"
+    "You are a Thinking Agent connected to a remote MCP server. You have NO direct "
+    "web access — rely on the server for all information retrieval and grounding.\n\n"
     "For complex queries follow this order:\n"
-    "  1. tavily_search       — gather live, real-world facts.\n"
-    "  2. remote_crag_tool    — retrieve graded domain knowledge.\n"
-    "  3. remote_reflection_tool — verify and correct your draft before answering.\n\n"
+    "  1. remote_crag_tool       — retrieve graded domain knowledge from the server "
+    "(it performs a live web fallback internally when needed).\n"
+    "  2. remote_reflection_tool — verify and correct your draft before answering.\n\n"
     "Call remote_reflection_tool once you have a draft, passing your draft as "
     "`draft_answer` and the user's question as `original_query`. After it returns, "
     "write your final answer immediately and concisely."

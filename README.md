@@ -16,8 +16,10 @@ A production-grade **uv monorepo** spanning three decoupled processes:
    trends, and runs **graph-contextual explainability audits** (proxy **SHAP** + **LIME**),
    served through an upgraded **Streamlit** XAI control room.
 
-Built on **LangChain 1.x** (`langchain`, `langchain-classic`, `langchain-tavily`,
-`langsmith`, `langgraph`), **Groq** for inference, **fastembed** for local embeddings.
+Built on **LangChain 1.x** (`langchain`, `langchain-core`, `langgraph`, `langsmith`),
+**Groq** for inference, **fastembed** for local embeddings, and **scikit-learn / numpy /
+shap / lime** for the explainability engine. The client owns no web-search library — all
+grounding is delegated to the server (which holds the single Tavily dependency).
 
 ```
 Decentralized-Tooling-via-the-Model-Context-Protocol-MCP-and-Corrective-RAG/
@@ -25,6 +27,7 @@ Decentralized-Tooling-via-the-Model-Context-Protocol-MCP-and-Corrective-RAG/
 ├── .env.example                ← all config keys (copy to .env)
 ├── REFLECTION.md               ← Stage 2 reflection
 ├── REFLECTION_STAGE3.md        ← Stage 3 reflection
+├── REFLECTION_STAGE4.md        ← Stage 4 reflection
 ├── mcp_agent_system.log        ← flat dual-stream log (sample multi-turn run)
 ├── mcp_agent_log.db            ← vector-enabled SQLite log store
 ├── analysis_agent.log          ← analysis-agent execution log
@@ -69,7 +72,8 @@ Decentralized-Tooling-via-the-Model-Context-Protocol-MCP-and-Corrective-RAG/
 External services:
 
 - **Groq** API key — inference for both the ReAct loop and the analysis agent.
-- **Tavily** API key — web grounding (client tool + server CRAG fallback).
+- **Tavily** API key — web grounding for the **server's** CRAG fallback only (the client
+  has no direct web-search tool; it relies on the server for retrieval).
 - **Neo4j Aura DB** (free tier) — knowledge-graph projection target.
 - **Embeddings** are *local* (`fastembed`, BAAI/bge-small-en-v1.5) — **no key required**.
 
@@ -208,9 +212,9 @@ uv run --package analysis-dashboard analysis-agent
 
 ```
 ┌──────────────── OPERATIONAL PLANE (Terminals 1 + 2) ────────────────┐
-│  agent_client (create_agent / Groq)                                 │
-│    ├─ tavily_search                                                 │
+│  agent_client (create_agent / Groq) — server-backed tools only      │
 │    ├─ remote_crag_tool ───────────► mcp_server  knowledge://domain  │
+│    │     (server-side Tavily web fallback — client has no web tool)  │
 │    └─ remote_reflection_tool ─────► mcp_server  reflection_tool     │
 │           │                              │                          │
 │           │   FastMCP streamable-http    │  MCP Sampling (no LLM     │
@@ -356,7 +360,7 @@ in the OS menu bar. See [`screenshots/`](screenshots/) for the capture checklist
 
 The Stage 2 pipeline is documented in `REFLECTION.md`. The agent — now built with the
 modern `create_agent` factory (native tool-calling, no legacy `create_react_agent` /
-`AgentExecutor`) — gathers facts via Tavily, retrieves graded domain knowledge via the
-CRAG resource, and verifies its draft via the 2-stage Reflection tool — all over
-`streamable-http`, with the server holding no API keys (every LLM call, including the
-Tree-of-Thought CRAG grading, is delegated back to the client via MCP Sampling).
+`AgentExecutor`) — retrieves graded domain knowledge via the server's CRAG resource (which
+performs its own Tavily web fallback server-side) and verifies its draft via the 2-stage
+Reflection tool — all over `streamable-http`, with the server holding no API keys (every
+LLM call, including the Tree-of-Thought CRAG grading, is delegated back via MCP Sampling).

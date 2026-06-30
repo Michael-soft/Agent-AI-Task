@@ -1,7 +1,7 @@
 """
 server.py
 ─────────
-Stage 2 FastMCP Server — streamable-http transport on port 8000.
+FastMCP Server (core service across Stages 2–4) — streamable-http on port 8000.
 
 Exposes
   Tool     → reflection_tool           : 2-stage Critique + Correction via MCP Sampling.

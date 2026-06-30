@@ -1127,3 +1127,272 @@ An AI Agent is an LLM-powered system with four capabilities:
 [2026-06-29 04:14:45] [CLIENT] [DEBUG] Log persisted | ns=logs.resilience.remote_reflection_tool | key=1782702885211-48bb7259 | type=tool_invocation | status=error
 [2026-06-29 04:14:45] [CLIENT] [INFO] Resilience counters | fallbacks=2 self_healing=2 retries=1 hardcoded=1
 [2026-06-29 04:14:45] [CLIENT] [INFO] Agent session complete — flat logs → mcp_agent_system.log, vector logs → mcp_agent_log.db
+[2026-06-30 20:14:30] [CLIENT] [INFO] ======================================================================
+[2026-06-30 20:14:30] [CLIENT] [INFO] Stage 3 Thinking Agent starting up (vector-logged)
+[2026-06-30 20:14:30] [CLIENT] [INFO] Session ID  : 900f6489-fb89-42f5-a7a9-271fb45186bc
+[2026-06-30 20:14:30] [CLIENT] [INFO] MCP Server URL: http://localhost:8000/mcp
+[2026-06-30 20:14:30] [CLIENT] [INFO] Log DB        : mcp_agent_log.db
+[2026-06-30 20:14:30] [CLIENT] [INFO] ======================================================================
+[2026-06-30 20:14:32] [CLIENT] [INFO] Hierarchical vector log store ready → mcp_agent_log.db (dims=384)
+[2026-06-30 20:14:32] [CLIENT] [INFO] ──────────────────────────────────────────────────────────────────────
+[2026-06-30 20:14:32] [CLIENT] [INFO] TURN 1/3 | session=900f6489-fb89-42f5-a7a9-271fb45186bc
+[2026-06-30 20:14:32] [CLIENT] [INFO] Query submitted to agent: 'What is the Model Context Protocol (MCP) and how does it differ from standard LangChain tool use? Which approach is better suited for enterprise-grade agentic systems requiring modularity and observability?'
+[2026-06-30 20:14:32] [CLIENT] [DEBUG] Log persisted | ns=logs.agent.session | key=1782846872932-c757a994 | type=tool_invocation | status=success
+[2026-06-30 20:14:34] [CLIENT] [INFO] remote_reflection_tool invoked by agent
+[2026-06-30 20:14:34] [CLIENT] [INFO] remote_crag_tool invoked | query='Model Context Protocol vs standard LangChain tool use for enterprise-grade agentic systems'
+[2026-06-30 20:14:34] [CLIENT] [DEBUG] ReflectionRequest validated | query='What is the Model Context Protocol (MCP) and how does it dif'
+[2026-06-30 20:14:34] [CLIENT] [INFO] Reading server resource 'knowledge://domain/Model%20Context%20Protocol%20vs%20standard%20LangChain%20tool%20use%20for%20enterprise-grade%20agentic%20systems'
+[2026-06-30 20:14:34] [CLIENT] [INFO] Calling server tool 'reflection_tool'
+[2026-06-30 20:14:34] [CLIENT] [INFO] Initialising FastMCP Client → http://localhost:8000/mcp
+[2026-06-30 20:14:34] [CLIENT] [INFO] Initialising FastMCP Client → http://localhost:8000/mcp
+[2026-06-30 20:14:35] [SERVER] [INFO] [2026-06-30 20:14:35] reflection_tool invoked — starting 2-stage critique loop
+[2026-06-30 20:14:35] [SERVER] [DEBUG] Stage 1 — dispatching Critique sampling request to client LLM
+[2026-06-30 20:14:35] [CLIENT] [INFO] Sampling request received from server | request_id=0
+[2026-06-30 20:14:35] [SERVER] [INFO] [2026-06-30 20:14:35] CRAG resource invoked | query='Model Context Protocol vs standard LangChain tool use for enterprise-grade agentic systems'
+[2026-06-30 20:14:35] [CLIENT] [INFO] Sampling request received from server | request_id=0
+[2026-06-30 20:14:35] [CLIENT] [INFO] Resilient sampling LLM initialised (RunnableWithRetry): llama-3.3-70b-versatile
+[2026-06-30 20:14:35] [CLIENT] [INFO] Resilient sampling LLM initialised (RunnableWithRetry): llama-3.3-70b-versatile
+[2026-06-30 20:14:36] [CLIENT] [INFO] Sampling response generated | tokens≈39
+[2026-06-30 20:14:36] [CLIENT] [INFO] Sampling response generated | tokens≈105
+[2026-06-30 20:14:36] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.client.sampling | key=1782846876143-16c144ee | type=sampling_request | status=success
+[2026-06-30 20:14:36] [SERVER] [DEBUG] CRAG Step 1 — dispatching Multi-Query Expansion to client LLM
+[2026-06-30 20:14:36] [SERVER] [INFO] Multi-query expansion: 4 queries ready
+[2026-06-30 20:14:36] [SERVER] [DEBUG] CRAG Step 2 — Hierarchical Indexing retrieval started
+[2026-06-30 20:14:36] [SERVER] [INFO] Hierarchical retrieval: 5 unique chunks found
+[2026-06-30 20:14:36] [SERVER] [DEBUG] CRAG Step 3 — Initiating ToT Evaluation on retrieved chunks
+[2026-06-30 20:14:36] [CLIENT] [INFO] Sampling request received from server | request_id=1
+[2026-06-30 20:14:36] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.client.sampling | key=1782846876172-b708419e | type=sampling_request | status=success
+[2026-06-30 20:14:36] [SERVER] [INFO] Stage 1 complete | is_sufficient=False
+[2026-06-30 20:14:36] [SERVER] [DEBUG] Stage 2 — dispatching Correction sampling request to client LLM
+[2026-06-30 20:14:36] [CLIENT] [INFO] Sampling request received from server | request_id=1
+[2026-06-30 20:14:38] [CLIENT] [INFO] Sampling response generated | tokens≈112
+[2026-06-30 20:14:38] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.client.sampling | key=1782846878282-02957b3f | type=sampling_request | status=success
+[2026-06-30 20:14:38] [SERVER] [DEBUG] ToT explored 3 reasoning branches → voted {'specificity': 0.6, 'completeness': 0.7, 'novelty': 0.7}
+[2026-06-30 20:14:38] [SERVER] [INFO] ToT scores — Specificity:0.60 Completeness:0.70 Novelty:0.70 | avg=0.67
+[2026-06-30 20:14:38] [SERVER] [INFO] CRAG resource complete | fallback_used=False
+[2026-06-30 20:14:38] [CLIENT] [INFO] Sampling response generated | tokens≈231
+[2026-06-30 20:14:38] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.server.resources.crag | key=1782846878428-accad002 | type=resource_read | status=success
+[2026-06-30 20:14:38] [CLIENT] [INFO] CRAGResponse validated | fallback_used=False | avg_tot=0.667 | queries=4
+[2026-06-30 20:14:38] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.client.sampling | key=1782846878532-d117d138 | type=sampling_request | status=success
+[2026-06-30 20:14:38] [SERVER] [INFO] Stage 2 correction complete — refined answer assembled
+[2026-06-30 20:14:38] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.server.tools.reflection_tool | key=1782846878694-cff2af68 | type=tool_invocation | status=success
+[2026-06-30 20:14:38] [CLIENT] [INFO] ReflectionResponse received | is_sufficient=False
+[2026-06-30 20:14:39] [CLIENT] [INFO] Agent completed execution
+[2026-06-30 20:14:39] [CLIENT] [INFO] Final Answer: The Model Context Protocol (MCP) is a framework designed to facilitate the development of modular and observable agentic systems. It differs from standard LangChain tool use by introducing a structured approach to context management and knowledge retrieval, which is achieved through a modular architecture that allows for the integration of multiple models and knowledge sources. MCP's context management mechanisms enable the creation of a shared knowledge graph, where context is represented as a set of entities, relationships, and concepts, allowing for more efficient and effective knowledge retrieval. This is particularly beneficial for enterprise-grade systems, as it enables the handling of complex queries and provides graded domain knowledge. For instance, in a customer service application, MCP can be used to integrate multiple language models, each specializing in a specific domain, such as product information or order tracking, to provide a more comprehensive and accurate response to customer inquiries. Furthermore, MCP's observability features, such as logging and monitoring, enable developers to track the performance of the system and identify areas for improvement, making it a more suitable choice for enterprise-grade agentic systems requiring modularity and observability. Overall, MCP's technical advantages, including its modular architecture, context management mechanisms, and knowledge retrieval processes, make it a more robust and scalable solution compared to standard LangChain tool use, and its benefits can be seen in various applications, such as virtual assistants, chatbots, and expert systems.
+[2026-06-30 20:14:39] [CLIENT] [INFO] Total tool calls: 2
+[2026-06-30 20:14:39] [CLIENT] [DEBUG] Step 1 | tool=remote_crag_tool | input={'query': 'Model Context Protocol vs standard LangChain tool use for enterprise-grade agentic systems'} | obs=[AGENTIC_AI — L2-frameworks]
+Production agent framework comparison (2025):
+• LangChain / LangGraph  — best for single + multi-agent with state graphs, human-in-the-loop, and streaming. Mature ecosyste
+[2026-06-30 20:14:40] [CLIENT] [DEBUG] Log persisted | ns=logs.agent.planning.remote_crag_tool | key=1782846879925-1-cc8d8c | type=tool_invocation | status=success
+[2026-06-30 20:14:40] [CLIENT] [DEBUG] Step 2 | tool=remote_reflection_tool | input={'draft_answer': 'The Model Context Protocol (MCP) is a framework that enables modular and observable agentic systems, d | obs=CallToolResult(content=[TextContent(type='text', text='{\n  "critique": "The draft answer provides a basic overview of the Model Context Protocol (MCP) and its differences from standard LangChain tool
+[2026-06-30 20:14:40] [CLIENT] [DEBUG] Log persisted | ns=logs.agent.planning.remote_reflection_tool | key=1782846880053-2-e63d38 | type=tool_invocation | status=success
+[2026-06-30 20:14:40] [CLIENT] [INFO] ──────────────────────────────────────────────────────────────────────
+[2026-06-30 20:14:40] [CLIENT] [INFO] TURN 2/3 | session=900f6489-fb89-42f5-a7a9-271fb45186bc
+[2026-06-30 20:14:40] [CLIENT] [INFO] Query submitted to agent: 'Explain Corrective RAG (CRAG) and Tree-of-Thought grading. How does hierarchical retrieval improve answer quality over naive RAG?'
+[2026-06-30 20:14:40] [CLIENT] [DEBUG] Log persisted | ns=logs.agent.session | key=1782846880146-abdc4dbb | type=tool_invocation | status=success
+[2026-06-30 20:14:40] [CLIENT] [INFO] remote_crag_tool invoked | query='Corrective RAG (CRAG) and Tree-of-Thought grading vs naive RAG'
+[2026-06-30 20:14:40] [CLIENT] [INFO] Reading server resource 'knowledge://domain/Corrective%20RAG%20%28CRAG%29%20and%20Tree-of-Thought%20grading%20vs%20naive%20RAG'
+[2026-06-30 20:14:40] [SERVER] [INFO] [2026-06-30 20:14:40] CRAG resource invoked | query='Corrective RAG (CRAG) and Tree-of-Thought grading vs naive RAG'
+[2026-06-30 20:14:40] [SERVER] [DEBUG] CRAG Step 1 — dispatching Multi-Query Expansion to client LLM
+[2026-06-30 20:14:40] [CLIENT] [INFO] Sampling request received from server | request_id=0
+[2026-06-30 20:14:42] [CLIENT] [INFO] Sampling response generated | tokens≈18
+[2026-06-30 20:14:43] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.client.sampling | key=1782846882907-e237d5be | type=sampling_request | status=success
+[2026-06-30 20:14:43] [SERVER] [INFO] Multi-query expansion: 4 queries ready
+[2026-06-30 20:14:43] [SERVER] [DEBUG] CRAG Step 2 — Hierarchical Indexing retrieval started
+[2026-06-30 20:14:43] [SERVER] [INFO] Hierarchical retrieval: 5 unique chunks found
+[2026-06-30 20:14:43] [SERVER] [DEBUG] CRAG Step 3 — Initiating ToT Evaluation on retrieved chunks
+[2026-06-30 20:14:43] [CLIENT] [INFO] Sampling request received from server | request_id=1
+[2026-06-30 20:14:43] [CLIENT] [INFO] Sampling response generated | tokens≈92
+[2026-06-30 20:14:44] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.client.sampling | key=1782846883944-69f84003 | type=sampling_request | status=success
+[2026-06-30 20:14:44] [SERVER] [DEBUG] ToT explored 3 reasoning branches → voted {'specificity': 0.8, 'completeness': 0.8, 'novelty': 0.7}
+[2026-06-30 20:14:44] [SERVER] [INFO] ToT scores — Specificity:0.80 Completeness:0.80 Novelty:0.70 | avg=0.77
+[2026-06-30 20:14:44] [SERVER] [INFO] CRAG resource complete | fallback_used=False
+[2026-06-30 20:14:44] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.server.resources.crag | key=1782846884078-bf98e3a9 | type=resource_read | status=success
+[2026-06-30 20:14:44] [CLIENT] [INFO] CRAGResponse validated | fallback_used=False | avg_tot=0.767 | queries=4
+[2026-06-30 20:14:50] [CLIENT] [INFO] remote_reflection_tool invoked by agent
+[2026-06-30 20:14:50] [CLIENT] [DEBUG] ReflectionRequest validated | query='Explain Corrective RAG (CRAG) and Tree-of-Thought grading. H'
+[2026-06-30 20:14:50] [CLIENT] [INFO] Calling server tool 'reflection_tool'
+[2026-06-30 20:14:50] [SERVER] [INFO] [2026-06-30 20:14:50] reflection_tool invoked — starting 2-stage critique loop
+[2026-06-30 20:14:50] [SERVER] [DEBUG] Stage 1 — dispatching Critique sampling request to client LLM
+[2026-06-30 20:14:50] [CLIENT] [INFO] Sampling request received from server | request_id=0
+[2026-06-30 20:14:57] [CLIENT] [INFO] Sampling response generated | tokens≈123
+[2026-06-30 20:14:57] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.client.sampling | key=1782846897446-869f6b19 | type=sampling_request | status=success
+[2026-06-30 20:14:57] [SERVER] [INFO] Stage 1 complete | is_sufficient=False
+[2026-06-30 20:14:57] [SERVER] [DEBUG] Stage 2 — dispatching Correction sampling request to client LLM
+[2026-06-30 20:14:57] [CLIENT] [INFO] Sampling request received from server | request_id=1
+[2026-06-30 20:15:03] [CLIENT] [INFO] Sampling response generated | tokens≈338
+[2026-06-30 20:15:04] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.client.sampling | key=1782846903872-998be42e | type=sampling_request | status=success
+[2026-06-30 20:15:04] [SERVER] [INFO] Stage 2 correction complete — refined answer assembled
+[2026-06-30 20:15:04] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.server.tools.reflection_tool | key=1782846904048-cd0a1004 | type=tool_invocation | status=success
+[2026-06-30 20:15:04] [CLIENT] [INFO] ReflectionResponse received | is_sufficient=False
+[2026-06-30 20:15:29] [CLIENT] [INFO] Agent completed execution
+[2026-06-30 20:15:29] [CLIENT] [INFO] Final Answer: Corrective RAG (CRAG) is a pipeline that enhances the traditional RAG (Retrieval-Augment-Generate) process by adding a corrective step to filter out irrelevant information. The CRAG pipeline consists of four stages: 
+* Retrieve: Standard similarity search to find relevant chunks of text.
+* Grade: A large language model (LLM) evaluates each chunk as 'relevant' or 'irrelevant'.
+* Correct: Irrelevant chunks are replaced or removed, and relevant chunks are used to create a corrected context.
+* Generate: The LLM generates a response based on the corrected context.
+
+Hierarchical CRAG extends this process by using multi-query expansion, hierarchical indexing, and Tree-of-Thought (ToT) grading. The hierarchical indexing strategy involves:
+* L1 (Summaries): Topic-level abstractions that are matched against the query.
+* L2 (Sections): Detailed explanations with examples.
+* L3 (Code/Data): Granular code blocks and structured reference data.
+
+This hierarchical approach reduces noise and improves precision by using topic routing before chunk scoring. The retrieval flow involves:
+1. Query matching against L1 summaries.
+2. Scoring topic relevance.
+3. Drilling into matching topic's L2/L3 chunks.
+4. Ranking by overlap score.
+
+The Tree-of-Thought implementation pattern involves:
+* Defining three personas: Analytical Expert, Systems Thinker, and Devil's Advocate.
+* Invoking each persona in sequence or parallel on the same question.
+* Evaluating all three paths on accuracy, completeness, risk, and actionability.
+* Returning the winning path and judge verdict.
+
+The connection between hierarchical retrieval and ToT grading is that the hierarchical approach provides a more precise and relevant set of chunks, which are then evaluated by the ToT process to ensure accuracy and completeness. This combination improves answer quality by reducing noise and hallucinations, and providing a more comprehensive and well-considered response.
+
+In contrast, naive RAG may retrieve irrelevant or hallucinated chunks, which can lead to poor answer quality. The hierarchical CRAG approach, combined with ToT grading, provides a more robust and reliable method for generating high-quality answers. The benefits of this approach include:
+* Improved precision and recall.
+* Reduced noise and hallucinations.
+* More comprehensive and well-considered responses.
+* Enhanced accuracy and completeness.
+[2026-06-30 20:15:29] [CLIENT] [INFO] Total tool calls: 2
+[2026-06-30 20:15:29] [CLIENT] [DEBUG] Step 1 | tool=remote_crag_tool | input={'query': 'Corrective RAG (CRAG) and Tree-of-Thought grading vs naive RAG'} | obs=[RAG_CRAG — L2-crag]
+Corrective RAG (CRAG) pipeline:
+1. Retrieve : Standard similarity search.
+2. Grade    : LLM evaluates each chunk — 'relevant' or 'irrelevant'.
+3. Correct  :
+   • All irrelevant → 
+[2026-06-30 20:15:29] [CLIENT] [DEBUG] Log persisted | ns=logs.agent.planning.remote_crag_tool | key=1782846929777-1-6a8d61 | type=tool_invocation | status=success
+[2026-06-30 20:15:29] [CLIENT] [DEBUG] Step 2 | tool=remote_reflection_tool | input={'draft_answer': "Corrective RAG (CRAG) pipeline: 1. Retrieve: Standard similarity search. 2. Grade: LLM evaluates each  | obs=CallToolResult(content=[TextContent(type='text', text='{\n  "critique": "The draft answer provides a comprehensive overview of Corrective RAG (CRAG) and Tree-of-Thought grading, including the hierarch
+[2026-06-30 20:15:30] [CLIENT] [DEBUG] Log persisted | ns=logs.agent.planning.remote_reflection_tool | key=1782846929937-2-a1be6b | type=tool_invocation | status=success
+[2026-06-30 20:15:30] [CLIENT] [INFO] ──────────────────────────────────────────────────────────────────────
+[2026-06-30 20:15:30] [CLIENT] [INFO] TURN 3/3 | session=900f6489-fb89-42f5-a7a9-271fb45186bc
+[2026-06-30 20:15:30] [CLIENT] [INFO] Query submitted to agent: 'Why is observability critical for distributed multi-agent MCP systems, and how do structured vector logs improve anomaly detection?'
+[2026-06-30 20:15:30] [CLIENT] [DEBUG] Log persisted | ns=logs.agent.session | key=1782846930031-46ed2117 | type=tool_invocation | status=success
+[2026-06-30 20:15:38] [CLIENT] [INFO] remote_crag_tool invoked | query='importance of observability in distributed multi-agent MCP systems and role of structured vector logs in anomaly detection'
+[2026-06-30 20:15:38] [CLIENT] [INFO] Reading server resource 'knowledge://domain/importance%20of%20observability%20in%20distributed%20multi-agent%20MCP%20systems%20and%20role%20of%20structured%20vector%20logs%20in%20anomaly%20detection'
+[2026-06-30 20:15:38] [SERVER] [INFO] [2026-06-30 20:15:38] CRAG resource invoked | query='importance of observability in distributed multi-agent MCP systems and role of structured vector logs in anomaly detection'
+[2026-06-30 20:15:38] [SERVER] [DEBUG] CRAG Step 1 — dispatching Multi-Query Expansion to client LLM
+[2026-06-30 20:15:38] [CLIENT] [INFO] Sampling request received from server | request_id=0
+[2026-06-30 20:15:39] [CLIENT] [INFO] Sampling response generated | tokens≈26
+[2026-06-30 20:15:39] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.client.sampling | key=1782846939337-b7a096e8 | type=sampling_request | status=success
+[2026-06-30 20:15:39] [SERVER] [INFO] Multi-query expansion: 4 queries ready
+[2026-06-30 20:15:39] [SERVER] [DEBUG] CRAG Step 2 — Hierarchical Indexing retrieval started
+[2026-06-30 20:15:39] [SERVER] [INFO] Hierarchical retrieval: 7 unique chunks found
+[2026-06-30 20:15:39] [SERVER] [DEBUG] CRAG Step 3 — Initiating ToT Evaluation on retrieved chunks
+[2026-06-30 20:15:39] [CLIENT] [INFO] Sampling request received from server | request_id=1
+[2026-06-30 20:15:40] [CLIENT] [INFO] Sampling response generated | tokens≈95
+[2026-06-30 20:15:40] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.client.sampling | key=1782846940420-cc7eba14 | type=sampling_request | status=success
+[2026-06-30 20:15:40] [SERVER] [DEBUG] ToT explored 3 reasoning branches → voted {'specificity': 0.26, 'completeness': 0.43, 'novelty': 0.3}
+[2026-06-30 20:15:40] [SERVER] [INFO] ToT scores — Specificity:0.26 Completeness:0.43 Novelty:0.30 | avg=0.33
+[2026-06-30 20:15:44] [SERVER] [INFO] Tavily fallback triggered — avg ToT score below 0.6
+[2026-06-30 20:15:44] [SERVER] [INFO] Tavily fallback complete — web context appended
+[2026-06-30 20:15:44] [SERVER] [INFO] CRAG resource complete | fallback_used=True
+[2026-06-30 20:15:45] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.server.resources.crag | key=1782846944860-40408e27 | type=resource_read | status=success
+[2026-06-30 20:15:45] [CLIENT] [INFO] CRAGResponse validated | fallback_used=True | avg_tot=0.33 | queries=4
+[2026-06-30 20:15:56] [CLIENT] [INFO] remote_reflection_tool invoked by agent
+[2026-06-30 20:15:56] [CLIENT] [DEBUG] ReflectionRequest validated | query='Why is observability critical for distributed multi-agent MC'
+[2026-06-30 20:15:56] [CLIENT] [INFO] Calling server tool 'reflection_tool'
+[2026-06-30 20:15:56] [SERVER] [INFO] [2026-06-30 20:15:56] reflection_tool invoked — starting 2-stage critique loop
+[2026-06-30 20:15:56] [SERVER] [DEBUG] Stage 1 — dispatching Critique sampling request to client LLM
+[2026-06-30 20:15:56] [CLIENT] [INFO] Sampling request received from server | request_id=0
+[2026-06-30 20:15:57] [CLIENT] [INFO] Sampling response generated | tokens≈121
+[2026-06-30 20:15:57] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.client.sampling | key=1782846957772-3786cc92 | type=sampling_request | status=success
+[2026-06-30 20:15:57] [SERVER] [INFO] Stage 1 complete | is_sufficient=False
+[2026-06-30 20:15:57] [SERVER] [DEBUG] Stage 2 — dispatching Correction sampling request to client LLM
+[2026-06-30 20:15:57] [CLIENT] [INFO] Sampling request received from server | request_id=1
+[2026-06-30 20:15:59] [CLIENT] [INFO] Sampling response generated | tokens≈313
+[2026-06-30 20:15:59] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.client.sampling | key=1782846959278-79e18113 | type=sampling_request | status=success
+[2026-06-30 20:15:59] [SERVER] [INFO] Stage 2 correction complete — refined answer assembled
+[2026-06-30 20:15:59] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.server.tools.reflection_tool | key=1782846959418-dcfdcbd6 | type=tool_invocation | status=success
+[2026-06-30 20:15:59] [CLIENT] [INFO] ReflectionResponse received | is_sufficient=False
+[2026-06-30 20:16:21] [CLIENT] [INFO] Agent completed execution
+[2026-06-30 20:16:21] [CLIENT] [INFO] Final Answer: Observability is critical for distributed multi-agent MCP systems as it enables the detection of anomalies and errors by providing a comprehensive and unified view of system behavior, allowing for timely corrections and improvements. This is achieved through the collection and analysis of metrics, logs, and traces from various system components, which helps to identify patterns, trends, and correlations that may indicate potential issues. In particular, observability enables the detection of anomalies and errors by leveraging techniques such as monitoring, logging, and tracing, which provide insights into system performance, latency, and fault tolerance. Structured vector logs improve anomaly detection by providing a standardized format for log data, making it easier to analyze and identify patterns, and enabling the use of machine learning algorithms to detect anomalies. For instance, structured vector logs can be used to create log-based metrics, such as error rates and request latency, which can be used to detect anomalies and trigger alerts. This is particularly important in complex systems where manual log analysis can be inefficient and prone to errors due to the large volumes of log data generated by multiple agents and components. Manual log analysis can lead to issues such as information overload, lack of context, and limited visibility into system behavior, making it challenging to identify and diagnose problems. By leveraging observability and structured vector logs, developers can address these challenges and ensure the reliability and performance of their MCP systems. For example, observability tools can provide automated log analysis, anomaly detection, and alerting, enabling developers to quickly identify and respond to issues, and structured vector logs can be used to create dashboards and visualizations that provide insights into system behavior and performance. Overall, the combination of observability and structured vector logs provides a powerful approach to anomaly detection and system monitoring in distributed multi-agent MCP systems, enabling developers to build more reliable, efficient, and scalable systems.
+[2026-06-30 20:16:21] [CLIENT] [INFO] Total tool calls: 2
+[2026-06-30 20:16:21] [CLIENT] [DEBUG] Step 1 | tool=remote_crag_tool | input={'query': 'importance of observability in distributed multi-agent MCP systems and role of structured vector logs in anom | obs=[AGENTIC_AI — L2-concept]
+An AI Agent is an LLM-powered system with four capabilities:
+(1) Perception — reads user inputs and tool observations.
+(2) Reasoning — plans next action via LLM Thought step.
+[2026-06-30 20:16:21] [CLIENT] [DEBUG] Log persisted | ns=logs.agent.planning.remote_crag_tool | key=1782846981290-1-f0fedf | type=tool_invocation | status=success
+[2026-06-30 20:16:21] [CLIENT] [DEBUG] Step 2 | tool=remote_reflection_tool | input={'draft_answer': 'Observability is critical for distributed multi-agent MCP systems as it enables the detection of anoma | obs=CallToolResult(content=[TextContent(type='text', text='{\n  "critique": "The draft answer provides a general overview of the importance of observability in distributed multi-agent MCP systems and the 
+[2026-06-30 20:16:21] [CLIENT] [DEBUG] Log persisted | ns=logs.agent.planning.remote_reflection_tool | key=1782846981428-2-d2e001 | type=tool_invocation | status=success
+[2026-06-30 20:16:21] [CLIENT] [INFO] ══════════════════════════════════════════════════════════════════════
+[2026-06-30 20:16:21] [CLIENT] [INFO] RESILIENCE DEMONSTRATION — retry / self-heal / hardcoded layers
+[2026-06-30 20:16:21] [CLIENT] [INFO] ══════════════════════════════════════════════════════════════════════
+[2026-06-30 20:16:21] [CLIENT] [INFO] [DEMO 1] Injecting transient fault → expect retry recovery
+[2026-06-30 20:16:21] [CLIENT] [WARNING] [RESILIENCE] retry attempt | remote_crag_tool | injected transient fault (HTTP 429-like) — retrying
+[2026-06-30 20:16:21] [CLIENT] [DEBUG] Log persisted | ns=logs.resilience.remote_crag_tool | key=1782846981517-33d40bbd | type=tool_invocation | status=error
+[2026-06-30 20:16:23] [CLIENT] [INFO] Reading server resource 'knowledge://domain/resilience%20self-test%3A%20transient%20network%20recovery'
+[2026-06-30 20:16:23] [SERVER] [INFO] [2026-06-30 20:16:23] CRAG resource invoked | query='resilience self-test: transient network recovery'
+[2026-06-30 20:16:23] [SERVER] [DEBUG] CRAG Step 1 — dispatching Multi-Query Expansion to client LLM
+[2026-06-30 20:16:23] [CLIENT] [INFO] Sampling request received from server | request_id=0
+[2026-06-30 20:16:24] [CLIENT] [INFO] Sampling response generated | tokens≈16
+[2026-06-30 20:16:24] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.client.sampling | key=1782846984514-16be3fe5 | type=sampling_request | status=success
+[2026-06-30 20:16:24] [SERVER] [INFO] Multi-query expansion: 4 queries ready
+[2026-06-30 20:16:24] [SERVER] [DEBUG] CRAG Step 2 — Hierarchical Indexing retrieval started
+[2026-06-30 20:16:24] [SERVER] [INFO] Hierarchical retrieval: 5 unique chunks found
+[2026-06-30 20:16:24] [SERVER] [DEBUG] CRAG Step 3 — Initiating ToT Evaluation on retrieved chunks
+[2026-06-30 20:16:24] [CLIENT] [INFO] Sampling request received from server | request_id=1
+[2026-06-30 20:16:27] [CLIENT] [INFO] Sampling response generated | tokens≈93
+[2026-06-30 20:16:27] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.client.sampling | key=1782846987737-43ff88d8 | type=sampling_request | status=success
+[2026-06-30 20:16:27] [SERVER] [DEBUG] ToT explored 3 reasoning branches → voted {'specificity': 0.2, 'completeness': 0.2, 'novelty': 0.6}
+[2026-06-30 20:16:27] [SERVER] [INFO] ToT scores — Specificity:0.20 Completeness:0.20 Novelty:0.60 | avg=0.33
+[2026-06-30 20:16:31] [SERVER] [INFO] Tavily fallback triggered — avg ToT score below 0.6
+[2026-06-30 20:16:31] [SERVER] [INFO] Tavily fallback complete — web context appended
+[2026-06-30 20:16:31] [SERVER] [INFO] CRAG resource complete | fallback_used=True
+[2026-06-30 20:16:31] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.server.resources.crag | key=1782846991661-a657b894 | type=resource_read | status=success
+[2026-06-30 20:16:31] [CLIENT] [INFO] CRAGResponse validated | fallback_used=True | avg_tot=0.333 | queries=4
+[2026-06-30 20:16:31] [CLIENT] [INFO] [DEMO 2] Injecting application fault → expect self-heal recovery
+[2026-06-30 20:16:31] [CLIENT] [INFO] Reading server resource 'knowledge://domain/resilience%20self-test%3A%20self-healing%20recovery'
+[2026-06-30 20:16:31] [SERVER] [INFO] [2026-06-30 20:16:31] CRAG resource invoked | query='resilience self-test: self-healing recovery'
+[2026-06-30 20:16:31] [SERVER] [DEBUG] CRAG Step 1 — dispatching Multi-Query Expansion to client LLM
+[2026-06-30 20:16:31] [CLIENT] [INFO] Sampling request received from server | request_id=0
+[2026-06-30 20:16:33] [CLIENT] [INFO] Sampling response generated | tokens≈18
+[2026-06-30 20:16:33] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.client.sampling | key=1782846993131-8e3118de | type=sampling_request | status=success
+[2026-06-30 20:16:33] [SERVER] [INFO] Multi-query expansion: 4 queries ready
+[2026-06-30 20:16:33] [SERVER] [DEBUG] CRAG Step 2 — Hierarchical Indexing retrieval started
+[2026-06-30 20:16:33] [SERVER] [INFO] Hierarchical retrieval: 4 unique chunks found
+[2026-06-30 20:16:33] [SERVER] [DEBUG] CRAG Step 3 — Initiating ToT Evaluation on retrieved chunks
+[2026-06-30 20:16:33] [CLIENT] [INFO] Sampling request received from server | request_id=1
+[2026-06-30 20:16:34] [CLIENT] [INFO] Sampling response generated | tokens≈82
+[2026-06-30 20:16:34] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.client.sampling | key=1782846994179-e21cb2c3 | type=sampling_request | status=success
+[2026-06-30 20:16:34] [SERVER] [DEBUG] ToT explored 3 reasoning branches → voted {'specificity': 0.2, 'completeness': 0.17, 'novelty': 0.43}
+[2026-06-30 20:16:34] [SERVER] [INFO] ToT scores — Specificity:0.20 Completeness:0.17 Novelty:0.43 | avg=0.27
+[2026-06-30 20:16:38] [SERVER] [INFO] Tavily fallback triggered — avg ToT score below 0.6
+[2026-06-30 20:16:38] [SERVER] [INFO] Tavily fallback complete — web context appended
+[2026-06-30 20:16:38] [SERVER] [INFO] CRAG resource complete | fallback_used=True
+[2026-06-30 20:16:38] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.server.resources.crag | key=1782846998615-34c92a68 | type=resource_read | status=success
+[2026-06-30 20:16:38] [CLIENT] [WARNING] [RESILIENCE] fallback activated | remote_crag_tool | ToolApplicationError: [injected] CRAG resource returned an invalid payload schema
+[2026-06-30 20:16:38] [CLIENT] [DEBUG] Log persisted | ns=logs.resilience.remote_crag_tool | key=1782846998811-d5ba7f7a | type=tool_invocation | status=error
+[2026-06-30 20:16:38] [CLIENT] [WARNING] [RESILIENCE] self-healing reinjection | remote_crag_tool | Tool 'remote_crag_tool' failed with: [injected] CRAG resource returned an invalid payload schema. Original query: resilience self-test: self-healing recovery. R
+[2026-06-30 20:16:38] [CLIENT] [DEBUG] Log persisted | ns=logs.resilience.remote_crag_tool | key=1782846998881-7d8ecdb8 | type=tool_invocation | status=error
+[2026-06-30 20:16:39] [CLIENT] [INFO] Reading server resource 'knowledge://domain/resilience%20self-test%3A%20self-healing%20recovery'
+[2026-06-30 20:16:39] [SERVER] [INFO] [2026-06-30 20:16:39] CRAG resource invoked | query='resilience self-test: self-healing recovery'
+[2026-06-30 20:16:39] [SERVER] [DEBUG] CRAG Step 1 — dispatching Multi-Query Expansion to client LLM
+[2026-06-30 20:16:39] [CLIENT] [INFO] Sampling request received from server | request_id=0
+[2026-06-30 20:16:41] [CLIENT] [INFO] Sampling response generated | tokens≈18
+[2026-06-30 20:16:41] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.client.sampling | key=1782847001323-e5748cc8 | type=sampling_request | status=success
+[2026-06-30 20:16:41] [SERVER] [INFO] Multi-query expansion: 4 queries ready
+[2026-06-30 20:16:41] [SERVER] [DEBUG] CRAG Step 2 — Hierarchical Indexing retrieval started
+[2026-06-30 20:16:41] [SERVER] [INFO] Hierarchical retrieval: 5 unique chunks found
+[2026-06-30 20:16:41] [SERVER] [DEBUG] CRAG Step 3 — Initiating ToT Evaluation on retrieved chunks
+[2026-06-30 20:16:41] [CLIENT] [INFO] Sampling request received from server | request_id=1
+[2026-06-30 20:16:42] [CLIENT] [INFO] Sampling response generated | tokens≈78
+[2026-06-30 20:16:42] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.client.sampling | key=1782847002418-d9f509f7 | type=sampling_request | status=success
+[2026-06-30 20:16:42] [SERVER] [DEBUG] ToT explored 3 reasoning branches → voted {'specificity': 0.3, 'completeness': 0.2, 'novelty': 0.6}
+[2026-06-30 20:16:42] [SERVER] [INFO] ToT scores — Specificity:0.30 Completeness:0.20 Novelty:0.60 | avg=0.37
+[2026-06-30 20:16:43] [SERVER] [INFO] Tavily fallback triggered — avg ToT score below 0.6
+[2026-06-30 20:16:43] [SERVER] [INFO] Tavily fallback complete — web context appended
+[2026-06-30 20:16:43] [SERVER] [INFO] CRAG resource complete | fallback_used=True
+[2026-06-30 20:16:43] [CLIENT] [DEBUG] Log persisted | ns=logs.mcp.server.resources.crag | key=1782847003386-9b347306 | type=resource_read | status=success
+[2026-06-30 20:16:43] [CLIENT] [INFO] CRAGResponse validated | fallback_used=True | avg_tot=0.367 | queries=4
+[2026-06-30 20:16:43] [CLIENT] [INFO] [DEMO 3] Forcing unrecoverable fault → expect hardcoded payload
+[2026-06-30 20:16:43] [CLIENT] [WARNING] [RESILIENCE] fallback activated | remote_reflection_tool | ToolApplicationError: [injected] unrecoverable reflection fault (catastrophic-fallback demo)
+[2026-06-30 20:16:43] [CLIENT] [DEBUG] Log persisted | ns=logs.resilience.remote_reflection_tool | key=1782847003496-204235c5 | type=tool_invocation | status=error
+[2026-06-30 20:16:43] [CLIENT] [WARNING] [RESILIENCE] self-healing reinjection | remote_reflection_tool | Tool 'remote_reflection_tool' failed with: [injected] unrecoverable reflection fault (catastrophic-fallback demo). Original query: resilience self-test: catastr
+[2026-06-30 20:16:43] [CLIENT] [DEBUG] Log persisted | ns=logs.resilience.remote_reflection_tool | key=1782847003542-7c5abe55 | type=tool_invocation | status=error
+[2026-06-30 20:16:44] [CLIENT] [ERROR] [RESILIENCE] HARDCODED absolute fallback | remote_reflection_tool | all retries + self-healing exhausted: ToolApplicationError: [injected] unrecoverable reflection fault (catastrophic-fallback demo)
+[2026-06-30 20:16:44] [CLIENT] [DEBUG] Log persisted | ns=logs.resilience.remote_reflection_tool | key=1782847004678-6106668f | type=tool_invocation | status=error
+[2026-06-30 20:16:44] [CLIENT] [INFO] Resilience counters | fallbacks=2 self_healing=2 retries=1 hardcoded=1
+[2026-06-30 20:16:44] [CLIENT] [INFO] Agent session complete — flat logs → mcp_agent_system.log, vector logs → mcp_agent_log.db

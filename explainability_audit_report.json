@@ -1,6 +1,6 @@
 {
   "schema": "explainability_audit_report/v1",
-  "generated_at": "2026-06-29T04:18:55.754124+00:00",
+  "generated_at": "2026-06-30T19:17:42.733654+00:00",
   "session_id": "bf42d439-8f73-45fd-82b6-60057f7f44de",
   "target": {
     "key": "1782157629140-2f4743f4",
@@ -97,64 +97,64 @@
   },
   "proxy_shap": {
     "model": "sklearn_logreg",
-    "baseline_value": 0.00928,
-    "predicted_error_proba": 0.38205,
+    "baseline_value": 0.00728,
+    "predicted_error_proba": 0.44004,
     "values": {
-      "payload_length": 0.15303,
-      "latency_ms": 0.05663,
-      "token_estimate": 0.08551,
-      "call_frequency": 0.07761
+      "payload_length": 0.17152,
+      "latency_ms": 0.06131,
+      "token_estimate": 0.1018,
+      "call_frequency": 0.09812
     },
     "most_influential_feature": "payload_length"
   },
   "proxy_lime": {
     "model": "sklearn_tfidf_logreg",
-    "base_confidence": 0.53074,
+    "base_confidence": 0.59446,
     "n_samples": 150,
     "n_tokens_analyzed": 10,
     "token_importances": [
       {
         "token": "injected",
-        "coefficient": 0.14523
+        "coefficient": 0.14892
       },
       {
         "token": "remote_crag_tool",
-        "coefficient": 0.04794
+        "coefficient": 0.06499
       },
       {
         "token": "fault",
-        "coefficient": 0.04126
+        "coefficient": 0.04639
       },
       {
         "token": "transient",
-        "coefficient": -0.02921
-      },
-      {
-        "token": "http",
-        "coefficient": 0.01706
+        "coefficient": -0.02176
       },
       {
         "token": "like",
-        "coefficient": -0.01135
+        "coefficient": -0.0143
       },
       {
-        "token": "retry",
-        "coefficient": 0.00548
-      },
-      {
-        "token": "attempt",
-        "coefficient": 0.0038
+        "token": "http",
+        "coefficient": 0.01253
       },
       {
         "token": "429",
-        "coefficient": -0.00145
+        "coefficient": -0.00579
+      },
+      {
+        "token": "retry",
+        "coefficient": 0.00514
+      },
+      {
+        "token": "attempt",
+        "coefficient": 0.00123
       },
       {
         "token": "retrying",
-        "coefficient": 0.001
+        "coefficient": 0.00016
       }
     ],
     "most_influential_token": "injected"
   },
-  "summary": "Targeted failure mode \u2192 resilience.remote_crag_tool / retry_attempt [error]: anomalous trace. Proxy SHAP attributes the structured skew primarily to 'payload_length' (predicted error confidence 0.38205). Proxy LIME flags the token 'injected' as the strongest local text driver. Graph context: 12 adjacent AgentAction(s) and 0 MCPServerCall(s) hydrated via neo4j_aura."
+  "summary": "Targeted failure mode \u2192 resilience.remote_crag_tool / retry_attempt [error]: anomalous trace. Proxy SHAP attributes the structured skew primarily to 'payload_length' (predicted error confidence 0.44004). Proxy LIME flags the token 'injected' as the strongest local text driver. Graph context: 12 adjacent AgentAction(s) and 0 MCPServerCall(s) hydrated via neo4j_aura."
 }
