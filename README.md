@@ -334,7 +334,7 @@ in the OS menu bar. See [`screenshots/`](screenshots/) for the capture checklist
 |---|---|---|
 | 1 | `01-audit-execution-loop.png` (+ `-2…-4`) | **Audit Hub** after running an Explainability Audit Report — SHAP bar chart, LIME token annotations, graph context, clock banner — OS clock visible |
 | 2 | `02-resilience-panel.png` (+ `-2`) | Sidebar **Resilience tracking** panel (fallback / self-healing / retry / hardcoded counts) — OS clock visible |
-| 3 | `03-edgeless-diagnostics.png` (+ `-2…-7`) | Diagnostics tab showing the **edgeless route** (`Command goto` hop trace) + rendered charts |
+| 3 | `03-edgeless-diagnostics.png` (+ `-2…-6`) | Diagnostics tab showing the **edgeless route** (`Command goto` hop trace) + rendered charts |
 
 > Terminal-side resilience evidence (retry → self-heal → hardcoded recoveries, and the
 > MCP streamable-http / Sampling round-trips) is captured in `mcp_agent_system.log` and

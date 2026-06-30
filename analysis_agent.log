@@ -771,3 +771,42 @@ The error frequency across components is reported as part of the TREND[errors] m
 
 The SHAP analysis reveals that the most influential feature contributing to this failure is "payload_length" with a value of 0.17152. This suggests that the si
 [2026-06-30 20:17:44] [ANALYSIS] [INFO] Analysis session complete — logs → analysis_agent.log
+[2026-06-30 22:50:40] [ANALYSIS] [INFO] Log store opened (read) → mcp_agent_log.db
+[2026-06-30 22:50:40] [ANALYSIS] [INFO] Building edgeless Log Analysis Agent (StateGraph + Command routing)
+[2026-06-30 22:50:40] [ANALYSIS] [INFO] Edgeless StateGraph compiled | 1 static edge (START→initial_ingest_node); all other hops via Command(goto)
+[2026-06-30 22:53:07] [ANALYSIS] [INFO] Explainability audit | session=None target=None
+[2026-06-30 22:53:10] [ANALYSIS] [INFO] Graph hydration → Neo4j Aura | session=bf42d439-8f73-45fd-82b6-60057f7f44de
+[2026-06-30 22:53:11] [ANALYSIS] [INFO] Audit complete | Targeted failure mode → resilience.remote_crag_tool / retry_attempt [error]: anomalous trace. Proxy SHAP attributes the structured skew primarily to 'payload_length' (predicted error confidence 0.44004). Proxy LIME flags the token 'injected' as the strongest local text driver. Graph context: 12 adjacent AgentAction(s) and 0 MCPServerCall(s) hydrated via neo4j_aura.
+[2026-06-30 22:53:11] [ANALYSIS] [INFO] Explainability audit report written → explainability_audit_report.json
+[2026-06-30 22:53:12] [ANALYSIS] [INFO] SHAP chart saved → charts/shap_feature_weights.png
+[2026-06-30 22:53:33] [ANALYSIS] [INFO] SHAP chart saved → charts/shap_feature_weights.png
+[2026-06-30 22:53:49] [ANALYSIS] [INFO] Explainability audit | session=None target=None
+[2026-06-30 22:53:49] [ANALYSIS] [INFO] Graph hydration → Neo4j Aura | session=bf42d439-8f73-45fd-82b6-60057f7f44de
+[2026-06-30 22:53:50] [ANALYSIS] [INFO] Audit complete | Targeted failure mode → resilience.remote_crag_tool / retry_attempt [error]: anomalous trace. Proxy SHAP attributes the structured skew primarily to 'payload_length' (predicted error confidence 0.44004). Proxy LIME flags the token 'injected' as the strongest local text driver. Graph context: 12 adjacent AgentAction(s) and 0 MCPServerCall(s) hydrated via neo4j_aura.
+[2026-06-30 22:53:50] [ANALYSIS] [INFO] Explainability audit report written → explainability_audit_report.json
+[2026-06-30 22:53:50] [ANALYSIS] [INFO] SHAP chart saved → charts/shap_feature_weights.png
+[2026-06-30 22:54:29] [ANALYSIS] [INFO] Explainability audit | session=None target=None
+[2026-06-30 22:54:29] [ANALYSIS] [INFO] Graph hydration → Neo4j Aura | session=bf42d439-8f73-45fd-82b6-60057f7f44de
+[2026-06-30 22:54:30] [ANALYSIS] [INFO] Audit complete | Targeted failure mode → resilience.remote_crag_tool / retry_attempt [error]: anomalous trace. Proxy SHAP attributes the structured skew primarily to 'payload_length' (predicted error confidence 0.44004). Proxy LIME flags the token 'injected' as the strongest local text driver. Graph context: 12 adjacent AgentAction(s) and 0 MCPServerCall(s) hydrated via neo4j_aura.
+[2026-06-30 22:54:30] [ANALYSIS] [INFO] Explainability audit report written → explainability_audit_report.json
+[2026-06-30 22:54:31] [ANALYSIS] [INFO] SHAP chart saved → charts/shap_feature_weights.png
+[2026-06-30 23:07:06] [ANALYSIS] [INFO] SHAP chart saved → charts/shap_feature_weights.png
+[2026-06-30 23:07:07] [ANALYSIS] [INFO] SHAP chart saved → charts/shap_feature_weights.png
+[2026-06-30 23:15:08] [ANALYSIS] [INFO] [edgeless] ingest | intent={'search': False, 'trend': False, 'graph': False, 'audit': True} | plan=['semantic_search_node', 'explainability_node'] | session=None
+[2026-06-30 23:15:08] [ANALYSIS] [INFO] semantic_log_search | query='Run an explainability audit on the most recent failure mode.' | limit=6
+[2026-06-30 23:15:08] [ANALYSIS] [INFO] semantic_log_search | 6 hits returned
+[2026-06-30 23:15:08] [ANALYSIS] [INFO] [edgeless] semantic_search_node → goto=explainability_node | plan_remaining=[]
+[2026-06-30 23:15:08] [ANALYSIS] [INFO] Explainability audit | session=None target=None
+[2026-06-30 23:15:08] [ANALYSIS] [INFO] Graph hydration → Neo4j Aura | session=bf42d439-8f73-45fd-82b6-60057f7f44de
+[2026-06-30 23:15:10] [ANALYSIS] [INFO] Audit complete | Targeted failure mode → resilience.remote_crag_tool / retry_attempt [error]: anomalous trace. Proxy SHAP attributes the structured skew primarily to 'payload_length' (predicted error confidence 0.44004). Proxy LIME flags the token 'injected' as the strongest local text driver. Graph context: 12 adjacent AgentAction(s) and 0 MCPServerCall(s) hydrated via neo4j_aura.
+[2026-06-30 23:15:10] [ANALYSIS] [INFO] SHAP chart saved → charts/shap_feature_weights.png
+[2026-06-30 23:15:10] [ANALYSIS] [INFO] Explainability audit report written → explainability_audit_report.json
+[2026-06-30 23:15:10] [ANALYSIS] [INFO] [edgeless] explainability_node → goto=synthesis_node | plan_remaining=[]
+[2026-06-30 23:15:12] [ANALYSIS] [INFO] SHAP chart saved → charts/shap_feature_weights.png
+[2026-06-30 23:15:18] [ANALYSIS] [INFO] [edgeless] ingest | intent={'search': False, 'trend': True, 'graph': False, 'audit': False} | plan=['trend_analysis_node'] | session=None
+[2026-06-30 23:15:18] [ANALYSIS] [INFO] analyze_tool_latency | window=3
+[2026-06-30 23:15:18] [ANALYSIS] [INFO] analyze_tool_latency | chart saved → charts/chart_20260630_231518.png
+[2026-06-30 23:15:18] [ANALYSIS] [INFO] analyze_error_frequency
+[2026-06-30 23:15:18] [ANALYSIS] [INFO] analyze_error_frequency | chart saved → charts/chart_20260630_231518.png
+[2026-06-30 23:15:18] [ANALYSIS] [INFO] [edgeless] trend_analysis_node → goto=synthesis_node | plan_remaining=[]
+[2026-06-30 23:15:20] [ANALYSIS] [INFO] SHAP chart saved → charts/shap_feature_weights.png
